@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "13-react-native-app",
-    "slug": "13-react-native-app",
+    "name": "snake-game",
+    "slug": "snake-game",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",

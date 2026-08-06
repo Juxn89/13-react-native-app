@@ -1,6 +1,6 @@
-# 📱 13 React Native App
+# 🐍 Snake Game — React Native Edition
 
-A modern, cross-platform mobile app built with **Expo Router**, **React 19**, and **TypeScript**, running natively on iOS, Android, and the Web.
+A modern, cross-platform **Snake game** built with **Expo**, **React 19**, and **TypeScript**. Play the classic game with native touch gestures on iOS, Android, and the Web.
 
 <p>
   <img alt="Expo" src="https://img.shields.io/badge/Expo-57-000020?style=for-the-badge&logo=expo&logoColor=white" />
@@ -10,8 +10,8 @@ A modern, cross-platform mobile app built with **Expo Router**, **React 19**, an
 </p>
 <p>
   <img alt="Expo Router" src="https://img.shields.io/badge/Expo_Router-57-4630EB?style=for-the-badge&logo=expo&logoColor=white" />
-  <img alt="Reanimated" src="https://img.shields.io/badge/Reanimated-4.5-FF6363?style=for-the-badge&logo=react&logoColor=white" />
   <img alt="Gesture Handler" src="https://img.shields.io/badge/Gesture_Handler-2.32-0EA5E9?style=for-the-badge&logo=react&logoColor=white" />
+  <img alt="Reanimated" src="https://img.shields.io/badge/Reanimated-4.5-FF6363?style=for-the-badge&logo=react&logoColor=white" />
   <img alt="pnpm" src="https://img.shields.io/badge/pnpm-workspace-F69220?style=for-the-badge&logo=pnpm&logoColor=white" />
 </p>
 <p>
@@ -21,9 +21,19 @@ A modern, cross-platform mobile app built with **Expo Router**, **React 19**, an
   <img alt="License" src="https://img.shields.io/badge/License-Private-8A2BE2?style=for-the-badge" />
 </p>
 
-## ✨ Overview
+## ✨ Features
 
-This project uses **file-based routing** with Expo Router, **React Compiler** for automatic memoization, and **Reanimated** for buttery-smooth, GPU-accelerated animations. It ships with a curated set of agent skills (`.agents/`, `.claude/`) that encode React Native performance and architecture best practices — see [`CLAUDE.md`](./CLAUDE.md) for the full guide.
+🎮 **Classic Snake Gameplay** — Guide the snake to eat food and grow longer without hitting walls or yourself
+
+👆 **Native Touch Gestures** — Pan gestures detect swipe direction instantly on mobile devices
+
+🧮 **Game Grid** — 36×64 cell grid for precise movement and collision detection
+
+⚡ **Smooth Animations** — GPU-accelerated animations with React Native Reanimated
+
+📱 **Cross-Platform** — Play on iOS simulator, Android emulator, or web browser
+
+🎨 **TypeScript** — Full type safety with strict mode enabled
 
 ## 🚀 Getting Started
 
@@ -39,16 +49,15 @@ pnpm install
 pnpm start
 ```
 
-**3. Open the app**
+**3. Launch the game**
 
-From the Metro output, choose where to run it:
+Choose your platform from the Metro output:
 
-- 📦 [Development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- 🤖 [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- 🍏 [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- 🧪 [Expo Go](https://expo.dev/go) — quick sandbox for trying things out
+- 🍏 **iOS simulator:** Press `i`
+- 🤖 **Android emulator:** Press `a`
+- 🌐 **Web browser:** Press `w`
 
-You can also target a platform directly:
+Or use a shortcut:
 
 ```bash
 pnpm ios      # 🍏 iOS simulator
@@ -56,7 +65,12 @@ pnpm android  # 🤖 Android emulator
 pnpm web      # 🌐 Web browser
 ```
 
-Start editing inside the **`src/app`** directory — routes are created automatically from the files you add there, thanks to [file-based routing](https://docs.expo.dev/router/introduction).
+## 🎮 How to Play
+
+1. **Swipe** in any direction to move the snake
+2. **Eat the food** (🔴) to grow longer and score points
+3. **Avoid walls** and your own snake body
+4. **Game Over** when you hit a wall or yourself
 
 ## 🧰 Tech Stack
 
@@ -65,19 +79,26 @@ Start editing inside the **`src/app`** directory — routes are created automati
 | 🧭 Framework | Expo SDK 57 · Expo Router |
 | ⚛️ UI | React 19 · React Native 0.86 |
 | 🔒 Language | TypeScript 6.0 (strict mode) |
-| 🎬 Animation | React Native Reanimated 4 · Worklets |
-| 👆 Gestures | React Native Gesture Handler |
+| 👆 Gestures | React Native Gesture Handler 2.32 |
+| 🎬 Animation | React Native Reanimated 4.5 |
 | 📦 Package Manager | pnpm (workspace) |
-| 🖼️ Assets | `expo-image` · `expo-symbols` · `expo-glass-effect` |
 
 ## 📂 Project Structure
 
 ```
 src/
-├── app/          🧭 Screens & layouts (file-based routing)
-├── components/   🧩 UI & feature components
-├── constants/    🎨 Theme & design tokens
-└── hooks/        🪝 Custom React hooks
+├── app/                    🎮 Game screens (file-based routing)
+│   ├── _layout.tsx         Root layout & theme setup
+│   ├── index.tsx           Home/game screen
+│   └── types/              Game types & enums
+│
+├── components/
+│   ├── Game.tsx            Main game logic & gesture handling
+│   ├── Snake.tsx           Snake rendering component
+│   └── index.ts            Component exports
+│
+├── constants/              🎨 Colors & theme
+└── hooks/                  🪝 Custom React hooks
 ```
 
 ## 📜 Available Scripts
@@ -91,33 +112,45 @@ src/
 | `pnpm lint` | 🧹 Lint the project with `expo lint` |
 | `pnpm reset-project` | 🔄 Reset to a blank starter app |
 
-## 🧼 Fresh Project
+## 🎯 Game Architecture
 
-Whenever you're ready for a clean slate:
+### Game Component (`Game.tsx`)
+- Manages game state (snake position, direction, food)
+- Handles pan gesture detection with `Gesture.Pan()` + `runOnJS()`
+- Game loop with `setInterval()` for snake movement
+- Collision detection logic
 
-```bash
-pnpm reset-project
+### Snake Component (`Snake.tsx`)
+- Renders each snake segment as a circular view
+- Positions segments based on coordinate grid
+- Absolute positioning for accurate placement
+
+### Types (`types/index.ts`)
+```typescript
+enum Direction { Up, Down, Left, Right }
+type Coordinate = { x: number, y: number }
+type Colors = { primary, background }
 ```
 
-This moves the current starter code into **`app-example`** and creates a blank **`app`** directory so you can start from scratch.
+## 🛠️ Development Notes
 
-## 🛠️ Additional Setup
-
-- 🧹 **Linting** — run `pnpm lint`, or follow the [ESLint & Prettier guide](https://docs.expo.dev/guides/using-eslint/)
-- ✅ **Unit testing** — see the [Jest testing guide](https://docs.expo.dev/develop/unit-testing/)
-- 🔷 **TypeScript** — see the [TypeScript guide](https://docs.expo.dev/guides/typescript/)
+- **React Compiler** is enabled in `app.json` for automatic memoization
+- **Gesture threading:** Pan gestures run on native thread, state updates wrapped with `runOnJS()` for safety
+- **Grid-based movement:** Each cell is approximately 10×10 pixels for consistent collision detection
 
 ## 📚 Project Documentation
 
-- 📘 [`CLAUDE.md`](./CLAUDE.md) — React Native + TypeScript + Expo best practices (source of truth)
-- 🤖 [`AGENTS.md`](./AGENTS.md) — Guidance for AI coding agents working in this repo
+- 📘 [`CLAUDE.md`](./CLAUDE.md) — React Native + TypeScript + Expo best practices (baseline for all projects)
+- 🤖 [`AGENTS.md`](./AGENTS.md) — Guidance for AI agents working on this repository
 
 ## 🌍 Learn More
 
 - 📖 [Expo documentation](https://docs.expo.dev/) — fundamentals and advanced [guides](https://docs.expo.dev/guides)
-- 🎓 [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/) — build a project that runs on Android, iOS, and web
+- 🎓 [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/) — build cross-platform apps
+- 👆 [Gesture Handler docs](https://docs.swmansion.com/react-native-gesture-handler/)
+- 🎬 [Reanimated docs](https://docs.swmansion.com/react-native-reanimated/)
 
-## 🤝 Join the Community
+## 🤝 Community
 
 - ⭐ [Expo on GitHub](https://github.com/expo/expo) — explore the open source platform
 - 💬 [Discord community](https://chat.expo.dev) — chat with other Expo developers
