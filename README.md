@@ -1,6 +1,6 @@
-# 📱 13 React Native App
+# 📱 React Native + TypeScript + Expo Monorepo
 
-A modern, cross-platform mobile app built with **Expo Router**, **React 19**, and **TypeScript**, running natively on iOS, Android, and the Web.
+A **production-ready baseline** for cross-platform mobile apps built with **Expo**, **React 19**, and **TypeScript**. This main branch serves as the source of truth for architecture patterns and best practices — all project branches extend or reference these guidelines.
 
 <p>
   <img alt="Expo" src="https://img.shields.io/badge/Expo-57-000020?style=for-the-badge&logo=expo&logoColor=white" />
@@ -10,8 +10,8 @@ A modern, cross-platform mobile app built with **Expo Router**, **React 19**, an
 </p>
 <p>
   <img alt="Expo Router" src="https://img.shields.io/badge/Expo_Router-57-4630EB?style=for-the-badge&logo=expo&logoColor=white" />
-  <img alt="Reanimated" src="https://img.shields.io/badge/Reanimated-4.5-FF6363?style=for-the-badge&logo=react&logoColor=white" />
   <img alt="Gesture Handler" src="https://img.shields.io/badge/Gesture_Handler-2.32-0EA5E9?style=for-the-badge&logo=react&logoColor=white" />
+  <img alt="Reanimated" src="https://img.shields.io/badge/Reanimated-4.5-FF6363?style=for-the-badge&logo=react&logoColor=white" />
   <img alt="pnpm" src="https://img.shields.io/badge/pnpm-workspace-F69220?style=for-the-badge&logo=pnpm&logoColor=white" />
 </p>
 <p>
@@ -21,11 +21,55 @@ A modern, cross-platform mobile app built with **Expo Router**, **React 19**, an
   <img alt="License" src="https://img.shields.io/badge/License-Private-8A2BE2?style=for-the-badge" />
 </p>
 
-## ✨ Overview
+## ✨ What This Is
 
-This project uses **file-based routing** with Expo Router, **React Compiler** for automatic memoization, and **Reanimated** for buttery-smooth, GPU-accelerated animations. It ships with a curated set of agent skills (`.agents/`, `.claude/`) that encode React Native performance and architecture best practices — see [`CLAUDE.md`](./CLAUDE.md) for the full guide.
+This is a **baseline monorepo** with opinionated configurations and patterns for React Native development:
 
-## 🚀 Getting Started
+- 📘 **CLAUDE.md** — Complete best practices guide (source of truth for all projects)
+- 🤖 **AGENTS.md** — Agent guidelines that reference CLAUDE.md
+- ⚡ **Skills** — `.agents/skills/` contains verified performance and architecture patterns
+- 🎯 **Type-safe** — TypeScript strict mode, path aliases, no `any` types
+- 🚀 **Optimized** — React Compiler enabled, Reanimated for animations, Gesture Handler for touch
+
+## 🎯 Project Branches
+
+Each branch represents a complete, standalone project built on this baseline:
+
+### 🔴 **01-pokedex** — Pokédex App
+Interactive Pokémon browser with live PokéAPI integration
+
+**Features:**
+- Browse Pokémon with front/back sprites
+- Type-based color scheme (fire→red, water→blue, etc.)
+- Tap to view detailed information
+- Responsive scrollable list
+
+**Tech focus:** REST API integration, navigation routing, dynamic styling
+
+**Get started:**
+```bash
+git checkout 01-pokedex
+pnpm install && pnpm start
+```
+
+### 🐍 **02-snake-game** — Classic Snake Game
+Touch-gesture controlled snake game with grid-based movement
+
+**Features:**
+- Pan gesture detection for direction control
+- Real-time collision detection
+- Scoring system with food mechanics
+- Smooth animations with Reanimated
+
+**Tech focus:** Gesture Handler, game loop architecture, native threading (`runOnJS`)
+
+**Get started:**
+```bash
+git checkout 02-snake-game
+pnpm install && pnpm start
+```
+
+## 🚀 Quick Start (Main Baseline)
 
 **1. Install dependencies**
 
@@ -33,22 +77,13 @@ This project uses **file-based routing** with Expo Router, **React Compiler** fo
 pnpm install
 ```
 
-**2. Start the development server**
+**2. Start development**
 
 ```bash
 pnpm start
 ```
 
-**3. Open the app**
-
-From the Metro output, choose where to run it:
-
-- 📦 [Development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- 🤖 [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- 🍏 [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- 🧪 [Expo Go](https://expo.dev/go) — quick sandbox for trying things out
-
-You can also target a platform directly:
+**3. Choose your platform**
 
 ```bash
 pnpm ios      # 🍏 iOS simulator
@@ -56,68 +91,135 @@ pnpm android  # 🤖 Android emulator
 pnpm web      # 🌐 Web browser
 ```
 
-Start editing inside the **`src/app`** directory — routes are created automatically from the files you add there, thanks to [file-based routing](https://docs.expo.dev/router/introduction).
+## 📚 Documentation
 
-## 🧰 Tech Stack
+**Read these in order:**
 
-| Category | Technology |
+| Document | Purpose |
 |---|---|
-| 🧭 Framework | Expo SDK 57 · Expo Router |
-| ⚛️ UI | React 19 · React Native 0.86 |
-| 🔒 Language | TypeScript 6.0 (strict mode) |
-| 🎬 Animation | React Native Reanimated 4 · Worklets |
-| 👆 Gestures | React Native Gesture Handler |
-| 📦 Package Manager | pnpm (workspace) |
-| 🖼️ Assets | `expo-image` · `expo-symbols` · `expo-glass-effect` |
+| 📘 [`CLAUDE.md`](./CLAUDE.md) | **START HERE** — Best practices, architecture, patterns, performance |
+| 🤖 [`AGENTS.md`](./AGENTS.md) | Agent guidelines (references CLAUDE.md as source of truth) |
+| 🎯 `.agents/skills/` | Verified rules & patterns for performance, design, state management |
 
-## 📂 Project Structure
+## 🧰 Tech Stack Baseline
+
+| Category | Technology | Notes |
+|---|---|---|
+| 🧭 Framework | Expo SDK 57, Expo Router | File-based routing, managed builds |
+| ⚛️ React | React 19, React Native 0.86 | Latest stable versions |
+| 🔒 Language | TypeScript 6.0 | Strict mode required |
+| 👆 Gestures | React Native Gesture Handler 2.32 | Native gesture detection |
+| 🎬 Animation | React Native Reanimated 4.5 | GPU-accelerated on native thread |
+| 🧬 Memoization | React Compiler | Enabled by default in `app.json` |
+| 📦 Package Manager | pnpm | Workspace-ready |
+
+All projects inherit these versions. Override only with documented justification in project-specific CLAUDE.md.
+
+## 📂 Repository Structure
 
 ```
-src/
-├── app/          🧭 Screens & layouts (file-based routing)
-├── components/   🧩 UI & feature components
-├── constants/    🎨 Theme & design tokens
-└── hooks/        🪝 Custom React hooks
+.
+├── CLAUDE.md              📘 Best practices baseline (source of truth)
+├── AGENTS.md              🤖 Agent guidelines
+├── README.md              This file
+├── app.json               Expo configuration
+├── tsconfig.json          TypeScript baseline
+├── package.json           Dependencies (main branch baseline)
+├── pnpm-lock.yaml         Lock file
+│
+├── .agents/               Skills & agent definitions
+│   └── skills/
+│       ├── react-native-best-practices/    Performance & optimization
+│       ├── react-native-architecture/      Navigation & state management
+│       ├── react-native-design/            Styling & animations
+│       └── vercel-react-native-skills/     Detailed rules
+│
+├── src/
+│   ├── app/               Expo Router screens (file-based routing)
+│   ├── components/        Reusable UI components
+│   ├── constants/         Theme, design tokens
+│   └── hooks/             Custom React hooks
+│
+└── assets/                Images, fonts, icons
 ```
+
+## 🆕 Creating a New Project
+
+1. **Create a feature branch:**
+   ```bash
+   git checkout -b 03-my-project
+   ```
+
+2. **Reference CLAUDE.md:**
+   - If your project follows the baseline exactly: no changes needed
+   - If deviating: create a project-specific `CLAUDE.md` documenting differences
+
+3. **Start building:**
+   ```bash
+   pnpm install
+   pnpm start
+   ```
+
+4. **Example project structure:**
+   ```markdown
+   # Project: My App (03-my-project)
+   
+   Extends [CLAUDE.md](../CLAUDE.md) with project-specific patterns.
+   
+   ## Features
+   - Feature 1
+   - Feature 2
+   
+   ## Deviations
+   - Using Redux instead of Jotai because [reason]
+   ```
 
 ## 📜 Available Scripts
 
 | Command | Description |
 |---|---|
-| `pnpm start` | ▶️ Start the Metro bundler |
+| `pnpm start` | ▶️ Start Metro bundler |
 | `pnpm ios` | 🍏 Run on iOS simulator |
 | `pnpm android` | 🤖 Run on Android emulator |
-| `pnpm web` | 🌐 Run in the browser |
-| `pnpm lint` | 🧹 Lint the project with `expo lint` |
-| `pnpm reset-project` | 🔄 Reset to a blank starter app |
+| `pnpm web` | 🌐 Run in web browser |
+| `pnpm lint` | 🧹 Lint with `expo lint` |
+| `pnpm reset-project` | 🔄 Reset to blank starter |
 
-## 🧼 Fresh Project
+## 🛠️ Development Workflow
 
-Whenever you're ready for a clean slate:
+### Before Writing Code
 
-```bash
-pnpm reset-project
-```
+1. **Read CLAUDE.md** — Understand baseline patterns for your feature
+2. **Check relevant skills** — `.agents/skills/react-native-best-practices/`, etc.
+3. **Type everything** — TypeScript strict mode required, no `any`
+4. **Use path aliases** — `@/components`, `@/hooks`, etc. (see `tsconfig.json`)
 
-This moves the current starter code into **`app-example`** and creates a blank **`app`** directory so you can start from scratch.
+### Performance First
 
-## 🛠️ Additional Setup
+- **Measure before optimizing** — use React DevTools Profiler
+- **Profile lists** — FlashList for 50+ items, FlatList otherwise
+- **Memoization** — let React Compiler handle it, or use `React.memo()` after profiling
+- **Bundle size** — avoid barrel imports, use direct imports
 
-- 🧹 **Linting** — run `pnpm lint`, or follow the [ESLint & Prettier guide](https://docs.expo.dev/guides/using-eslint/)
-- ✅ **Unit testing** — see the [Jest testing guide](https://docs.expo.dev/develop/unit-testing/)
-- 🔷 **TypeScript** — see the [TypeScript guide](https://docs.expo.dev/guides/typescript/)
+### Styling & Layout
 
-## 📚 Project Documentation
-
-- 📘 [`CLAUDE.md`](./CLAUDE.md) — React Native + TypeScript + Expo best practices (source of truth)
-- 🤖 [`AGENTS.md`](./AGENTS.md) — Guidance for AI coding agents working in this repo
+- **Use `StyleSheet.create()`** — not inline styles
+- **Safe area** — wrap screens with `SafeAreaView` from `react-native-safe-area-context`
+- **Flexbox** — standard React Native layout
+- **Platform-specific files** — `.ios.ts`, `.android.ts` for platform differences
 
 ## 🌍 Learn More
 
-- 📖 [Expo documentation](https://docs.expo.dev/) — fundamentals and advanced [guides](https://docs.expo.dev/guides)
-- 🎓 [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/) — build a project that runs on Android, iOS, and web
+- 📖 [Expo docs v57](https://docs.expo.dev/versions/v57.0.0/) — official baseline
+- 🎓 [React documentation](https://react.dev) — React 19 patterns
+- 👆 [Gesture Handler](https://docs.swmansion.com/react-native-gesture-handler/)
+- 🎬 [Reanimated](https://docs.swmansion.com/react-native-reanimated/)
 
-## 🤝 Join the Community
+## 🤝 Community & Support
 
-- ⭐ [Expo on GitHub](https://github.com/expo/expo) — explore the open source platform
-- 💬 [Discord community](https://chat.expo.dev) — chat with other Expo developers
+- ⭐ [Expo on GitHub](https://github.com/expo/expo)
+- 💬 [Discord community](https://chat.expo.dev)
+
+## 📝 License
+
+Private — internal use only
